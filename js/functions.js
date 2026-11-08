@@ -25,3 +25,21 @@ function getNumbers(line) {
 
   return numberInLine === '' ? NaN : parseInt(numberInLine, 10);
 }
+
+function checkMeetingTime(workStart, workEnd, meetingStart, meetingDuration) {
+
+  function parseTimeToMinutes(timeString) {
+    const parts = timeString.split(':');
+    const hours = parseInt(parts[0], 10);
+    const minutes = parseInt(parts[1], 10);
+    return hours * 60 + minutes;
+  }
+
+  const workStartMinutes = parseTimeToMinutes(workStart);
+  const workEndMinutes = parseTimeToMinutes(workEnd);
+  const meetingStartMinutes = parseTimeToMinutes(meetingStart);
+
+  const meetingEndMinutes = meetingStartMinutes + meetingDuration;
+
+  return meetingStartMinutes >= workStartMinutes && meetingEndMinutes <= workEndMinutes;
+}
